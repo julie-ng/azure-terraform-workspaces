@@ -1,24 +1,15 @@
-variable "workspace_name" {
-  type    = string
+variable "name" {
+  type    		= string
+	description = "Base name of your workspace that will be used in resource names. Please use lowercase with dashes"
 }
 
 variable "location" {
-  type    = string
-	default = "westeurope"
+  type   			= string
+	description = "Azure Region for resources. Defaults to Western Europe."
+	default 		= "westeurope"
 }
 
-# variable "suffix_length" {
-#   type    = integer
-# 	default = 6
-# }
-
-
-resource "random_string" "workspace_suffix" {
-  length  = 6
-  special = false
-  upper   = false
+locals {
+	name								 = lower(var.name)
+	storage_account_name = replace(local.name, "-", "")
 }
-
-# variable "workspace_suffix" {
-# 	value = random_string.suffix.result
-# }

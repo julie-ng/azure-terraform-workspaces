@@ -1,6 +1,5 @@
 output "workspace" {
 	value = {
-		suffix 									 = random_string.workspace_suffix.result
 		resource_group_name 		 = azurerm_resource_group.workspace_rg.name
 		tf_state_storage_account = azurerm_storage_account.tfstate.name
 	}

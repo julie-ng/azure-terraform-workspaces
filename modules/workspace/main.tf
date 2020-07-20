@@ -4,16 +4,14 @@
 # RESOURCE GROUP
 
 resource "azurerm_resource_group" "workspace_rg" {
-  name     = "${var.workspace_name}-rg"
+  name     = "${local.name}-rg"
   location = var.location
 }
-
 
 # TF STATE BACKEND - STORAGE ACCOUNT
 
 resource "azurerm_storage_account" "tfstate" {
-	# replace("1 + 2 + 3", "non-alphanumberic", "")
-  name                     = "${var.workspace_name}tfstate"
+  name                     = local.storage_account_name
   resource_group_name      = azurerm_resource_group.workspace_rg.name
   location                 = azurerm_resource_group.workspace_rg.location
   account_tier             = "Standard"
@@ -25,7 +23,7 @@ resource "azurerm_storage_account" "tfstate" {
 # SERVICE_PRINCIPAL
 
 resource "azuread_application" "arm_client" {
-  name = "${var.workspace_name}-${random_string.workspace_suffix.result}-sp"
+  name = "${local.name}-sp"
 
 	depends_on = [
     azurerm_resource_group.workspace_rg
@@ -35,7 +33,8 @@ resource "azuread_application" "arm_client" {
 resource "random_password" "arm_secret" {
   length           = 36
   special          = true
-  min_special      = 4
+  min_numeric      = 5
+	min_special      = 3
   override_special = "-_%@?"
 }
 

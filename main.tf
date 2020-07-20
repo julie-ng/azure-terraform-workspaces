@@ -1,21 +1,18 @@
-# Root Module
-
-# Something like create workspace for
-
-# - "my-demo-fruit"
-# - "somethingelse"
-
+resource "random_string" "suffix" {
+  length  = 5
+  special = false
+  upper   = false
+}
 
 module "workspace_demo" {
   source = "./modules/workspace"
-
-  workspace_name = "jngtftest"
+  name   = "jng-${random_string.suffix.result}"
 }
 
 output "workspace" {
-	value = {
-		workspace 				= module.workspace_demo.workspace
-		service_principal = module.workspace_demo.service_principal
-		rbac							= module.workspace_demo.service_principal_role
-	}
+  value = {
+    workspace         = module.workspace_demo.workspace
+    service_principal = module.workspace_demo.service_principal
+    rbac              = module.workspace_demo.service_principal_role
+  }
 }
