@@ -1,29 +1,26 @@
-output "workspace_suffix" {
-	value = random_string.workspace_suffix.result
-}
-
-output "workspace_resource_group_name" {
-  value = azurerm_resource_group.workspace_rg.name
-}
-
-output "workspace_tf_state_storage_account" {
-  value = azurerm_storage_account.tfstate.name
+output "workspace" {
+	value = {
+		suffix 									 = random_string.workspace_suffix.result
+		resource_group_name 		 = azurerm_resource_group.workspace_rg.name
+		tf_state_storage_account = azurerm_storage_account.tfstate.name
+	}
 }
 
 # Credentials needed for DevOps
 
-output "sp_app_id" {
-	value = azuread_application.arm_client.application_id
+output "service_principal" {
+	value = {
+		display_name    = azuread_application.arm_client.name
+		object_id 			= azuread_application.arm_client.object_id
+		application_id  = azuread_application.arm_client.application_id
+		client_secret 	= random_password.arm_secret.result
+	}
 }
 
-output "object_id" {
-	value = azuread_application.arm_client.object_id
-}
-
-output "sp_client_secret" {
-	value = random_password.arm_secret.result
-}
-
-output "sp_role_assignment_id" {
-	value = azurerm_role_assignment.arm_sp.id
+output "service_principal_role" {
+	value = {
+		name 					= azurerm_role_assignment.arm_sp.role_definition_name
+		scope 				= azurerm_role_assignment.arm_sp.scope
+		assignment_id = azurerm_role_assignment.arm_sp.id
+	}
 }
