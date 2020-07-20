@@ -25,7 +25,7 @@ resource "azurerm_storage_account" "tfstate" {
 resource "azuread_application" "arm_client" {
   name = "${local.name}-sp"
 
-	depends_on = [
+  depends_on = [
     azurerm_resource_group.workspace_rg
   ]
 }
@@ -34,7 +34,7 @@ resource "random_password" "arm_secret" {
   length           = 36
   special          = true
   min_numeric      = 5
-	min_special      = 3
+  min_special      = 3
   override_special = "-_%@?"
 }
 
