@@ -5,10 +5,6 @@ provider "azurerm" {
 
 terraform {
   backend "azurerm" {
-    resource_group_name  = "terraform-workspaces-rg"
-    storage_account_name = "tfworkspacestfstate"
-    container_name       = "resourcegroups"
-    key                  = "workspaces.tfstate"
   }
 }
 
