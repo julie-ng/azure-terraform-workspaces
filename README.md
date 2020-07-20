@@ -23,7 +23,7 @@ Each "environment" here is an independent workload.
 
 ### Pre-requsites
 
-⚠️ Run this *only locally* on your machine. It outputs service principal secrets, which you will need for CI/CD workflows
+⚠️  Run this *only locally* on your machine. It outputs service principal secrets, which you will need for CI/CD workflows
 
 - Logged in via `az login`
 - `Owner` rights on your subscription
