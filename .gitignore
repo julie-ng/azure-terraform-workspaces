@@ -1,0 +1,17 @@
+.DS_Store
+.env
+*.azcli
+*.log
+
+.terraform/
+*.conf
+*.tfplan
+
+certs/
+*.cert
+*.key
+*.pfx
+secrets.tf
+
+debug/*
+hello-world/*
